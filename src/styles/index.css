@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&display=swap');
+/* font-family: 'Shippori Mincho', serif; */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Shippori Mincho', serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
