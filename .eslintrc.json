@@ -31,6 +31,6 @@
       }
     ],
     "react/react-in-jsx-scope": "off",
-    "quotes": ["error", "single"]
+    "quotes": [0]
   }
 }

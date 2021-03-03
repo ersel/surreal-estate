@@ -1,9 +1,9 @@
 import styled from 'styled-components';
-import logo from '../images/logo.png';
 import { Link } from 'react-router-dom';
+import logo from '../images/logo.png';
 
 const NavContainer = styled.div`
-  border-bottom: 1px solid #c8c8c8;
+  border-bottom: 1px solid ${(props) => props.theme.details};
   display: flex;
   justify-content: flex-start;
 `;
@@ -30,10 +30,10 @@ const NavLinksList = styled.ul`
   align-self: center;
 `;
 
-const linkStyles = {
-  color: 'black',
-  textDecoration: 'none',
-};
+const StyledLink = styled(Link)`
+  color: ${(props) => props.theme.fontColor};
+  text-decoration: none;
+`;
 
 const NavBar = () => {
   return (
@@ -41,14 +41,10 @@ const NavBar = () => {
       <Logo src={logo} />
       <NavLinksList>
         <NavLink>
-          <Link to="/" style={linkStyles}>
-            View Properties
-          </Link>
+          <StyledLink to="/">View Properties</StyledLink>
         </NavLink>
         <NavLink>
-          <Link to="/add-property" style={linkStyles}>
-            Add a Property
-          </Link>
+          <StyledLink to="/add-property">Add a Property</StyledLink>
         </NavLink>
       </NavLinksList>
     </NavContainer>

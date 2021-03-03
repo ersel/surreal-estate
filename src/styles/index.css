@@ -1,10 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500&display=swap');
 /* font-family: 'Shippori Mincho', serif; */
 
-* {
-  box-sizing: border-box;
-}
-
 body {
   margin: 0;
   padding: 0;

@@ -1,9 +1,12 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/index.css';
-import App from './components/App';
-import reportWebVitals from './reportWebVitals';
+import './styles/normalize.css';
 import { BrowserRouter as Router } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+import App from './components/App';
 
 ReactDOM.render(
   <React.StrictMode>

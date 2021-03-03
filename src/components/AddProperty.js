@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import styled from 'styled-components';
 import React, { useState } from 'react';
 import { Heading, Subheading } from '../styles/styles';
@@ -11,13 +12,15 @@ const Form = styled.form`
   border-radius: 5px;
   margin: 0 auto;
   padding: 10px 40px;
-  width: 45%;
-  background-color: #d7e1e8;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 20px 25px -5px, rgba(0, 0, 0, 0.04) 0px 10px 10px -5px;
+  max-width: 600px;
+  background-color: ${(props) => props.theme.fg};
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 20px 25px -5px,
+    rgba(0, 0, 0, 0.06) 0px 10px 10px -5px;
+  font-size: 0.8rem;
 `;
 
 const FormItemWrap = styled.div`
-  border-bottom: 1px solid #a2a2a2;
+  border-bottom: 1px solid ${(props) => props.theme.details};
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -37,6 +40,7 @@ const ShortInput = styled.input`
 const Label = styled.label`
   align-self: flex-start;
   margin-bottom: 10px;
+  font-size: 1.2rem;
 `;
 
 const Select = styled.select`
