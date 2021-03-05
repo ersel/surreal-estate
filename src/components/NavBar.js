@@ -8,11 +8,20 @@ const NavContainer = styled.div`
   justify-content: flex-start;
 `;
 
-const Logo = styled.img`
+const Logo = styled.span`
+  display: flex;
+  align-items: center;
+`;
+
+const LogoText = styled.p`
+  margin: 0;
+  font-weight: 800;
+`;
+
+const LogoImage = styled.img`
   width: 50px;
   padding: 0px;
-  margin: 0 30px;
-  align-self: center;
+  margin: 0px;
 `;
 
 const NavLink = styled.li`
@@ -38,7 +47,11 @@ const StyledLink = styled(Link)`
 const NavBar = () => {
   return (
     <NavContainer>
-      <Logo src={logo} />
+      <Logo>
+        <LogoImage src={logo} />
+        <LogoText>Surreal Estate</LogoText>
+      </Logo>
+
       <NavLinksList>
         <NavLink>
           <StyledLink to="/">View Properties</StyledLink>

@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Alert it displays a success message 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdfBwQ pKYGM"
+  >
+    <p
+      class="sc-gsTCUz cyCbzE"
+    >
+      Property added.
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Alert it displays an error message 1`] = `
+<DocumentFragment>
+  <div
+    class="sc-bdfBwQ dcSyjK"
+  >
+    <p
+      class="sc-gsTCUz cyCbzE"
+    >
+      Error!
+    </p>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Alert it does not render when there is no alert message 1`] = `<DocumentFragment />`;
