@@ -12,7 +12,7 @@ import getPropertyListings from '../util/requests/getPropertyListings';
 const PropertiesContainer = styled.div`
   border: 1px solid purple;
   display: grid;
-  grid-template-columns: 200px 1fr;
+  grid-template-columns: 250px 1fr;
   grid-template-rows: 0.1fr 1fr 1fr 1fr 1fr;
   grid-gap: 20px;
 `;
