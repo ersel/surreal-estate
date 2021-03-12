@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 import { useState } from 'react';
 import styled from 'styled-components';
@@ -28,32 +29,29 @@ const Input = styled.input`
   width: 95%;
 `;
 
+const buildQueryString = (operation, valueObj, search) => {
+  const currentQueryParams = qs.parse(search, {
+    ignoreQueryPrefix: true,
+  });
+
+  const newQueryParams = {
+    ...currentQueryParams,
+    [operation]: JSON.stringify({
+      ...JSON.parse(currentQueryParams[operation] || '{}'),
+      ...valueObj,
+    }),
+  };
+
+  return qs.stringify(newQueryParams, {
+    addQueryPrefix: true,
+    encode: true,
+  });
+};
+
 const SideBar = () => {
   const [searchInput, setSearchInput] = useState('');
   const history = useHistory();
   const { search } = useLocation();
-
-  const buildQueryString = (operation, valueObj) => {
-    // console.log(search);
-    const currentQueryParams = qs.parse(search, {
-      ignoreQueryPrefix: true,
-    });
-
-    const newQueryParams = {
-      ...currentQueryParams,
-      [operation]: JSON.stringify({
-        ...JSON.parse(currentQueryParams[operation] || '{}'),
-        ...valueObj,
-      }),
-    };
-
-    return qs.stringify(newQueryParams, {
-      addQueryPrefix: true,
-      encode: true,
-    });
-  };
-
-  // ?query={"city":"Exeter","title":{"$regex":"bungalow"}}
 
   const handleChange = (e) => {
     setSearchInput(e.target.value);
@@ -61,33 +59,39 @@ const SideBar = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const searchPath = buildQueryString('query', {
-      title: { $regex: searchInput },
-    });
+    const searchPath = buildQueryString(
+      'query',
+      {
+        title: { $regex: searchInput },
+      },
+      search
+    );
     history.push(searchPath);
   };
 
   return (
     <SideBarWrap>
       <MenuHeading>Filter by City</MenuHeading>
-      <StyledLink to={buildQueryString('query', { city: 'Manchester' })}>
+      <StyledLink
+        to={buildQueryString('query', { city: 'Manchester' }, search)}
+      >
         Manchester
       </StyledLink>
-      <StyledLink to={buildQueryString('query', { city: 'Leeds' })}>
+      <StyledLink to={buildQueryString('query', { city: 'Leeds' }, search)}>
         Leeds
       </StyledLink>
-      <StyledLink to={buildQueryString('query', { city: 'Liverpool' })}>
+      <StyledLink to={buildQueryString('query', { city: 'Liverpool' }, search)}>
         Liverpool
       </StyledLink>
-      <StyledLink to={buildQueryString('query', { city: 'Sheffield' })}>
+      <StyledLink to={buildQueryString('query', { city: 'Sheffield' }, search)}>
         Sheffield
       </StyledLink>
       <StyledLink to="/">All</StyledLink>
       <MenuHeading>Sort by</MenuHeading>
-      <StyledLink to={buildQueryString('sort', { price: 1 })}>
+      <StyledLink to={buildQueryString('sort', { price: 1 }, search)}>
         Price Ascending
       </StyledLink>
-      <StyledLink to={buildQueryString('sort', { price: -1 })}>
+      <StyledLink to={buildQueryString('sort', { price: -1 }, search)}>
         Price Descending
       </StyledLink>
       <MenuHeading>Search by Keyword</MenuHeading>
@@ -101,6 +105,7 @@ const SideBar = () => {
         />
         <Button>Go</Button>
       </Form>
+      <StyledLink to="/">Clear all filters</StyledLink>
     </SideBarWrap>
   );
 };

@@ -1,5 +1,8 @@
+/* eslint-disable react/require-default-props */
+import { useState } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { Button } from '../styles/styles';
 import formatNumber from '../util/helpers/formatNumber';
 
@@ -17,7 +20,37 @@ const PropertyInfo = styled.p`
 `;
 
 const PropertyCard = (props) => {
-  const { title, city, type, price, bathrooms, bedrooms, email } = props;
+  const [saveAlert, setSaveAlert] = useState('');
+
+  const {
+    title,
+    city,
+    type,
+    price,
+    bathrooms,
+    bedrooms,
+    email,
+    id,
+    userID,
+  } = props;
+
+  const saveProperty = () => {
+    axios
+      .post('http://localhost:3000/api/v1/Favourite', {
+        propertyListing: id,
+        fbUserId: userID,
+      })
+      .then((response) => {
+        setSaveAlert('Property added to favourites');
+        console.log(response);
+      })
+      .catch((error) => {
+        setSaveAlert(
+          'There was an error saving property. Please try again later.'
+        );
+        console.error(error);
+      });
+  };
 
   return (
     <PropertyCardContainer>
@@ -35,6 +68,8 @@ const PropertyCard = (props) => {
       <a href={`mailto:${email}`}>
         <Button>Email</Button>
       </a>
+      {userID && <Button onClick={saveProperty}>Save</Button>}
+      <p>{saveAlert}</p>
     </PropertyCardContainer>
   );
 };
@@ -47,6 +82,8 @@ PropertyCard.propTypes = {
   bathrooms: PropTypes.number.isRequired,
   bedrooms: PropTypes.number.isRequired,
   email: PropTypes.string.isRequired,
+  userID: PropTypes.number,
+  id: PropTypes.string.isRequired,
 };
 
 export default PropertyCard;

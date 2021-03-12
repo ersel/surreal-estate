@@ -1,4 +1,6 @@
-import { Fragment } from 'react';
+/* eslint-disable react/jsx-fragments */
+/* eslint-disable no-console */
+import { Fragment, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
 import NavBar from './NavBar';
@@ -14,16 +16,33 @@ const AppWrap = styled.div`
 `;
 
 function App() {
+  const [userID, setUserID] = useState();
+
+  const handleLogin = (response) => {
+    console.log({ response });
+    setUserID(Number(response.id));
+  };
+  const handleLogout = () => {
+    window.FB.logout((response) => {
+      console.log('Logged out', { response });
+    });
+    setUserID();
+  };
+
   return (
-    <>
+    <Fragment>
       <GlobalStyle />
       <ThemeProvider id="theme" theme={colorTheme}>
         <Router>
           <AppWrap id="appWrap">
-            <NavBar />
+            <NavBar
+              onLogin={handleLogin}
+              onLogout={handleLogout}
+              userID={userID}
+            />
             <Switch>
-              <Route exact path="/">
-                <Properties />
+              <Route exact path="/" userID={userID}>
+                <Properties userID={userID} />
               </Route>
               <Route path="/add-property">
                 <AddProperty />
@@ -32,7 +51,7 @@ function App() {
           </AppWrap>
         </Router>
       </ThemeProvider>
-    </>
+    </Fragment>
   );
 }
 

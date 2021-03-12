@@ -1,5 +1,8 @@
+/* eslint-disable react/require-default-props */
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import FacebookLogin from 'react-facebook-login';
 import logo from '../images/logo.png';
 
 const NavContainer = styled.div`
@@ -44,7 +47,9 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-const NavBar = () => {
+const FacebookLogout = styled.button``;
+
+const NavBar = ({ onLogin, onLogout, userID }) => {
   return (
     <NavContainer>
       <Logo>
@@ -60,8 +65,24 @@ const NavBar = () => {
           <StyledLink to="/add-property">Add a Property</StyledLink>
         </NavLink>
       </NavLinksList>
+      {userID ? (
+        <FacebookLogout onClick={onLogout}>Log out</FacebookLogout>
+      ) : (
+        <FacebookLogin
+          appId="447200789851010"
+          autoLoad={false}
+          fields="name,email,picture"
+          callback={onLogin}
+        />
+      )}
     </NavContainer>
   );
+};
+
+NavBar.propTypes = {
+  onLogin: PropTypes.func.isRequired,
+  onLogout: PropTypes.func.isRequired,
+  userID: PropTypes.number,
 };
 
 export default NavBar;

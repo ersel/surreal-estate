@@ -1,6 +1,9 @@
+/* eslint-disable react/jsx-fragments */
+/* eslint-disable react/require-default-props */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-console */
-import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import { Fragment, useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -30,7 +33,7 @@ const CardsContainer = styled.div`
   grid-gap: 20px;
 `;
 
-const Properties = () => {
+const Properties = ({ userID }) => {
   const [properties, setProperties] = useState([]);
   const [alert, setAlert] = useState({ message: '', isSuccess: true });
   const { search } = useLocation();
@@ -75,22 +78,26 @@ const Properties = () => {
         {...prop}
         bedrooms={Number(prop.bedrooms)}
         bathrooms={Number(prop.bathrooms)}
-        price={Number(prop.price)}
         key={prop._id}
+        id={prop._id}
+        userID={userID}
       />
     );
   });
 
   return (
-    <>
+    <Fragment>
       <PropertiesContainer>
         <Heading>Properties For Sale</Heading>
         <SideBar />
         <Alert message={alert.message} isSuccess={alert.isSuccess} />
         <CardsContainer>{allPropertyCards}</CardsContainer>
       </PropertiesContainer>
-    </>
+    </Fragment>
   );
 };
 
+Properties.propTypes = {
+  userID: PropTypes.number,
+};
 export default Properties;
