@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 const AlertBox = styled.div`
   width: 97%;
+  height: auto;
   margin: 0 auto;
   margin-bottom: 20px;
   padding-left: 20px;

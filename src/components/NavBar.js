@@ -62,6 +62,9 @@ const NavBar = ({ onLogin, onLogout, userID }) => {
           <StyledLink to="/">View Properties</StyledLink>
         </NavLink>
         <NavLink>
+          <StyledLink to="/saved-properties">Saved Properties</StyledLink>
+        </NavLink>
+        <NavLink>
           <StyledLink to="/add-property">Add a Property</StyledLink>
         </NavLink>
       </NavLinksList>

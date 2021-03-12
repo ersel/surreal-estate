@@ -1,14 +1,15 @@
 /* eslint-disable react/require-default-props */
-import { useState } from 'react';
+
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+
 import { Button } from '../styles/styles';
 import formatNumber from '../util/helpers/formatNumber';
 
 const PropertyCardContainer = styled.div`
   width: 100%;
   border: 1px solid purple;
+  background-color: ${(props) => props.theme.fg};
 `;
 
 const PropertyTitle = styled.h3`
@@ -20,37 +21,18 @@ const PropertyInfo = styled.p`
 `;
 
 const PropertyCard = (props) => {
-  const [saveAlert, setSaveAlert] = useState('');
-
   const {
-    title,
-    city,
-    type,
-    price,
     bathrooms,
     bedrooms,
+    city,
     email,
     id,
+    price,
+    saveProperty,
+    title,
+    type,
     userID,
   } = props;
-
-  const saveProperty = () => {
-    axios
-      .post('http://localhost:3000/api/v1/Favourite', {
-        propertyListing: id,
-        fbUserId: userID,
-      })
-      .then((response) => {
-        setSaveAlert('Property added to favourites');
-        console.log(response);
-      })
-      .catch((error) => {
-        setSaveAlert(
-          'There was an error saving property. Please try again later.'
-        );
-        console.error(error);
-      });
-  };
 
   return (
     <PropertyCardContainer>
@@ -68,22 +50,22 @@ const PropertyCard = (props) => {
       <a href={`mailto:${email}`}>
         <Button>Email</Button>
       </a>
-      {userID && <Button onClick={saveProperty}>Save</Button>}
-      <p>{saveAlert}</p>
+      {userID && <Button onClick={() => saveProperty(id)}>Save</Button>}
     </PropertyCardContainer>
   );
 };
 
 PropertyCard.propTypes = {
-  title: PropTypes.string.isRequired,
-  city: PropTypes.string.isRequired,
-  type: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
   bathrooms: PropTypes.number.isRequired,
   bedrooms: PropTypes.number.isRequired,
+  city: PropTypes.string.isRequired,
   email: PropTypes.string.isRequired,
-  userID: PropTypes.number,
   id: PropTypes.string.isRequired,
+  price: PropTypes.number.isRequired,
+  saveProperty: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
+  type: PropTypes.string.isRequired,
+  userID: PropTypes.number,
 };
 
 export default PropertyCard;

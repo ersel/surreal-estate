@@ -8,6 +8,7 @@ import Properties from './Properties';
 import AddProperty from './AddProperty';
 import { colorTheme } from '../styles/styles';
 import GlobalStyle from '../styles/globalStyles';
+import SavedProperties from './SavedProperties';
 
 const AppWrap = styled.div`
   min-height: 100vh;
@@ -41,11 +42,14 @@ function App() {
               userID={userID}
             />
             <Switch>
-              <Route exact path="/" userID={userID}>
+              <Route exact path="/">
                 <Properties userID={userID} />
               </Route>
               <Route path="/add-property">
                 <AddProperty />
+              </Route>
+              <Route path="/saved-properties">
+                <SavedProperties />
               </Route>
             </Switch>
           </AppWrap>

@@ -10,7 +10,7 @@ const SideBarWrap = styled.div`
   border: 1px solid blue;
   width: 100%;
   height: 100%;
-  grid-row: 1 / -1;
+  grid-row: 1 / span 3;
   background-color: ${(props) => props.theme.fg};
   display: flex;
   flex-direction: column;

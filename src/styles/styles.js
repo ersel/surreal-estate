@@ -23,8 +23,8 @@ export const paleTheme = {
 };
 
 export const colorTheme = {
-  bg: '#fffbfb',
-  fg: '#e0e9f7',
+  bg: '#e0e9f7',
+  fg: 'white',
   details: '#feffff',
   fontColor: '#17252A',
 };
