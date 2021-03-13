@@ -14,6 +14,7 @@ The data is stored in a Mongo database, and Axios is used to make requests to th
 **Packages**
 - PropTypes
 - Axios
+- React Facebook Login
 
 ---
 
