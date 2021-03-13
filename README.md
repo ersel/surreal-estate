@@ -15,6 +15,7 @@ The data is stored in a Mongo database, and Axios is used to make requests to th
 - PropTypes
 - Axios
 - React Facebook Login
+- React Router
 
 ---
 
